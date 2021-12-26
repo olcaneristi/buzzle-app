@@ -1,8 +1,32 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Image,
+  KeyboardAvoidingView,
+  ScrollView,
+  View,
+  Text,
+  TextInput,
+  SafeAreaView,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
+import { allValidations } from '../../utils/validations';
+import { styles } from '../../styles/login.styles';
 
 const Login = ({ navigation }) => {
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
+  const [avoidEnabled, setAvoidEnabled] = useState(false);
+
+  const togglePassword = () => {
+    setIsSecureEntry(prev => !prev);
+  };
+
+  const DismissKeyboard = ({ children }) => (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>{children}</TouchableWithoutFeedback>
+  );
+
   const {
     control,
     handleSubmit,
@@ -23,84 +47,101 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Login</Text>
-      <Controller
-        control={control}
-        rules={{
-          required: {
-            value: true,
-            message: 'This field is required.',
-          },
-          minLength: {
-            value: 2,
-            message: 'Too Many Characters',
-          },
-          pattern: {
-            value:
-              /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-            message: 'Not a valid e-mail',
-          },
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
-            placeholder="email"
-            onBlur={onBlur}
-            value={value}
-            onChangeText={onChange}
-          />
-        )}
-        name="email"
-      />
-      {errors.email && <Text style={styles.error}>{errors?.email?.message}</Text>}
+    <SafeAreaView style={styles.login}>
+      <DismissKeyboard>
+        <View style={styles.container}>
+          <View style={styles.main}>
+            <View style={styles.textContainer}>
+              <Text style={styles.header}>Let's sign you in.</Text>
+              <Text style={styles.label}>Welcome back.</Text>
+              <Text style={styles.label}>You've been missed!</Text>
+            </View>
+            <KeyboardAvoidingView behavior="position" enabled={avoidEnabled}>
+              <ScrollView style={styles.forms}>
+                <Controller
+                  control={control}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: allValidations.REQUIRED,
+                    },
+                    pattern: allValidations.CHECK_VALIDITY_OF_EMAIL,
+                  }}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                      autoCapitalize="none"
+                      style={styles.input}
+                      placeholder="Email or username"
+                      placeholderTextColor={'gray'}
+                      onBlur={onBlur}
+                      value={value}
+                      onFocus={() => setAvoidEnabled()}
+                      onChangeText={onChange}
+                    />
+                  )}
+                  name="email"
+                />
+                {errors.email && <Text style={styles.error}>{errors?.email?.message}</Text>}
 
-      <Controller
-        control={control}
-        rules={{
-          required: {
-            value: true,
-            message: 'This field is required.',
-          },
-          minLength: {
-            value: 6,
-            message: 'Please much more',
-          },
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
-            placeholder="password"
-            onBlur={onBlur}
-            value={value}
-            onChangeText={onChange}
-          />
-        )}
-        name="password"
-      />
-      {errors.password && <Text style={styles.error}>{errors?.password?.message}</Text>}
+                <View style={styles.passwordField}>
+                  <Controller
+                    control={control}
+                    rules={{
+                      required: {
+                        value: true,
+                        message: allValidations.REQUIRED,
+                      },
+                      minLength: allValidations.MIN_LENGTH_PASSWORD(8),
+                      pattern: allValidations.CHECK_PASSWORD,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                      <TextInput
+                        secureTextEntry={isSecureEntry}
+                        autoCapitalize="none"
+                        style={[styles.input, styles.password]}
+                        placeholder="Password"
+                        placeholderTextColor={'gray'}
+                        onBlur={onBlur}
+                        onFocus={() => setAvoidEnabled()}
+                        value={value}
+                        onChangeText={onChange}
+                      />
+                    )}
+                    name="password"
+                  />
+                  <TouchableOpacity style={styles.showIcon} onPress={togglePassword}>
+                    {isSecureEntry ? (
+                      <Image source={require('../../assets/Show.png')} />
+                    ) : (
+                      <Image source={require('../../assets/Hide.png')} />
+                    )}
+                  </TouchableOpacity>
+                </View>
+                {errors.password && <Text style={styles.error}>{errors?.password?.message}</Text>}
+              </ScrollView>
+            </KeyboardAvoidingView>
+          </View>
 
-      <Button title="Login" onPress={handleSubmit(onSubmit)} />
-      <Button title="Create account" onPress={() => navigation.navigate('SignUp')} />
-    </View>
+          <View style={styles.cta}>
+            <View style={styles.registerContainer}>
+              <Text style={styles.registerText}>Don't have an account? </Text>
+              <TouchableOpacity
+                style={styles.registerButton}
+                title="Register"
+                onPress={() => navigation.navigate('SignUp')}
+              >
+                <Text style={styles.registerButtonText}>Register</Text>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity style={styles.signInButton} onPress={handleSubmit(onSubmit)}>
+              <Text style={styles.signInText}>Sign In</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </DismissKeyboard>
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  input: {
-    borderWidth: 1,
-    borderRadius: 10,
-    height: 45,
-    width: '60%',
-    marginVertical: 10,
-    padding: 15,
-  },
-});
 
 export default Login;
