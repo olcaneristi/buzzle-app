@@ -16,8 +16,8 @@ export default function App() {
         }}
       >
         <Stack.Screen options={{ headerShown: false }} name="Intro" component={Intro} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen options={{ title: 'Create Account' }} name="SignUp" component={SignUp} />
+        <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
+        <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen options={{ title: 'Forgot Password' }} name="ForgotPassword" component={ForgotPassword} />
       </Stack.Navigator>
