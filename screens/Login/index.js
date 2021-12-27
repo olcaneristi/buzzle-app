@@ -65,7 +65,7 @@ const Login = ({ navigation }) => {
                     autoCapitalize="none"
                     style={loginStyles.input}
                     placeholder="Email or username"
-                    placeholderTextColor={'gray'}
+                    placeholderTextColor={'rgba(213, 214, 240, 0.7)'}
                     onBlur={onBlur}
                     value={value}
                     onFocus={() => setAvoidEnabled()}
@@ -93,7 +93,7 @@ const Login = ({ navigation }) => {
                       autoCapitalize="none"
                       style={[loginStyles.input, loginStyles.password]}
                       placeholder="Password"
-                      placeholderTextColor={'gray'}
+                      placeholderTextColor={'rgba(213, 214, 240, 0.7)'}
                       onBlur={onBlur}
                       onFocus={() => setAvoidEnabled()}
                       value={value}
@@ -129,7 +129,7 @@ const Login = ({ navigation }) => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={loginStyles.signInButton} onPress={handleSubmit(onSubmit)}>
+          <TouchableOpacity style={loginStyles.submitButton} onPress={handleSubmit(onSubmit)}>
             <Text style={loginStyles.signInText}>Sign In</Text>
           </TouchableOpacity>
         </View>

@@ -4,7 +4,7 @@ export const loginStyles = StyleSheet.create({
   login: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#000',
+    backgroundColor: '#181b27',
     width: '100%',
   },
 
@@ -46,12 +46,11 @@ export const loginStyles = StyleSheet.create({
 
   input: {
     borderWidth: 1,
-    borderColor: '#606060',
+    borderColor: 'rgba(201, 202, 236, 0.4)',
     borderRadius: 10,
     height: 60,
     marginVertical: 10,
     padding: 15,
-    backgroundColor: '#0a0a0a',
     color: 'white',
     fontSize: 16,
     letterSpacing: 1.2,
@@ -109,7 +108,7 @@ export const loginStyles = StyleSheet.create({
     fontSize: 16,
   },
 
-  signInButton: {
+  submitButton: {
     borderRadius: 15,
     backgroundColor: '#fff',
     paddingVertical: 20,
@@ -128,5 +127,52 @@ export const registerStyles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
     color: '#fff',
+  },
+});
+
+export const forgotPassStyles = StyleSheet.create({
+  passwordReset: {
+    flex: 1,
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: '#181b27',
+  },
+
+  container: {
+    width: '90%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginVertical: 15,
+  },
+
+  header: {
+    fontSize: 24,
+    fontWeight: '700',
+    textAlign: 'center',
+    color: 'white',
+    marginTop: 15,
+    marginBottom: 15,
+  },
+
+  cta: {
+    marginVertical: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  resetButton: {
+    borderRadius: 15,
+    backgroundColor: '#272d3d',
+    paddingVertical: 20,
+    width: '60%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1.5,
+    borderColor: 'rgba(86, 90, 99, 0.3)',
+  },
+  resetButtonText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: 'white',
   },
 });
