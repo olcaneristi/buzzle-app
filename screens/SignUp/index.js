@@ -1,24 +1,41 @@
-import React, { useState } from 'react';
-import { View, Text, SafeAreaView, ScrollView, KeyboardAvoidingView, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState, useRef } from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  TextInput,
+  Image,
+} from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { allValidations } from '../../utils/validations';
 import { loginStyles, registerStyles } from '../../styles/login.styles';
 
 const SignUp = ({ navigation }) => {
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [avoidEnabled, setAvoidEnabled] = useState(false);
 
   const {
     control,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
       name: '',
       email: '',
       password: '',
-      confirmPassword: '',
     },
   });
+
+  const togglePassword = () => {
+    setIsSecureEntry(prev => !prev);
+  };
+
+  const password = useRef({});
+  password.current = watch('password', '');
 
   const onSubmit = (data, e) => {
     try {
@@ -28,6 +45,7 @@ const SignUp = ({ navigation }) => {
       console.log(error);
     }
   };
+
   return (
     <SafeAreaView style={loginStyles.login}>
       <View style={loginStyles.container}>
@@ -86,31 +104,40 @@ const SignUp = ({ navigation }) => {
               />
               {errors.email && <Text style={loginStyles.error}>{errors?.email?.message}</Text>}
 
-              <Controller
-                control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: allValidations.REQUIRED,
-                  },
-                  minLength: allValidations.MIN_LENGTH_PASSWORD(8),
-                  pattern: allValidations.CHECK_PASSWORD,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    secureTextEntry={true}
-                    autoCapitalize="none"
-                    style={loginStyles.input}
-                    placeholder="Password"
-                    placeholderTextColor={'gray'}
-                    onBlur={onBlur}
-                    onFocus={() => setAvoidEnabled()}
-                    value={value}
-                    onChangeText={onChange}
-                  />
-                )}
-                name="password"
-              />
+              <View style={loginStyles.passwordField}>
+                <Controller
+                  control={control}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: allValidations.REQUIRED,
+                    },
+                    minLength: allValidations.MIN_LENGTH_PASSWORD(8),
+                    pattern: allValidations.CHECK_PASSWORD,
+                  }}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                      secureTextEntry={isSecureEntry}
+                      autoCapitalize="none"
+                      style={[loginStyles.input, loginStyles.password]}
+                      placeholder="Password"
+                      placeholderTextColor={'gray'}
+                      onBlur={onBlur}
+                      onFocus={() => setAvoidEnabled()}
+                      value={value}
+                      onChangeText={onChange}
+                    />
+                  )}
+                  name="password"
+                />
+                <TouchableOpacity style={loginStyles.showIcon} onPress={togglePassword}>
+                  {isSecureEntry ? (
+                    <Image source={require('../../assets/Show.png')} />
+                  ) : (
+                    <Image source={require('../../assets/Hide.png')} />
+                  )}
+                </TouchableOpacity>
+              </View>
               {errors.password && <Text style={loginStyles.error}>{errors?.password?.message}</Text>}
 
               <Controller
@@ -120,8 +147,7 @@ const SignUp = ({ navigation }) => {
                     value: true,
                     message: allValidations.REQUIRED,
                   },
-                  minLength: allValidations.MIN_LENGTH_PASSWORD(8),
-                  pattern: allValidations.CHECK_PASSWORD,
+                  validate: value => value === password.current || 'The passwords do not match',
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput

@@ -54,6 +54,7 @@ export const loginStyles = StyleSheet.create({
     backgroundColor: '#0a0a0a',
     color: 'white',
     fontSize: 16,
+    letterSpacing: 1.2,
   },
 
   passwordField: {
