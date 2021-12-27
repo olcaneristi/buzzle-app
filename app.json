@@ -1,30 +1,31 @@
 {
-   "expo": {
-      "name": "hello-react-native",
-      "slug": "hello-react-native",
-      "version": "1.0.0",
-      "orientation": "portrait",
-      "icon": "./assets/icon.png",
-      "splash": {
-         "image": "./assets/splash.png",
-         "resizeMode": "contain",
-         "backgroundColor": "#ffffff"
-      },
-      "updates": {
-         "fallbackToCacheTimeout": 0
-      },
-      "assetBundlePatterns": ["**/*"],
-      "ios": {
-         "supportsTablet": true
-      },
-      "android": {
-         "adaptiveIcon": {
-            "foregroundImage": "./assets/adaptive-icon.png",
-            "backgroundColor": "#FFFFFF"
-         }
-      },
-      "web": {
-         "favicon": "./assets/favicon.png"
+  "expo": {
+    "name": "Buzzle",
+    "slug": "hello-react-native",
+    "platforms": ["ios", "android"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon2.png",
+    "splash": {
+      "image": "./assets/splash2.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#181b27"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive_icon.png",
+        "backgroundColor": "#FFFFFF"
       }
-   }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }
