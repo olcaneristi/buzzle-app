@@ -12,14 +12,14 @@ export default function App() {
         screenOptions={{
           headerTransparent: true,
           headerBackTitleVisible: false,
-          headerTintColor: 'white',
+          headerTintColor: '#b4bccf',
         }}
       >
         <Stack.Screen options={{ headerShown: false }} name="Intro" component={Intro} />
         <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
         <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen options={{ title: 'Forgot Password' }} name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen options={{ headerTitle: '' }} name="ForgotPassword" component={ForgotPassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );

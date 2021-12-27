@@ -1,19 +1,69 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
+import { loginStyles, forgotPassStyles } from '../../styles/login.styles';
+import { useForm, Controller } from 'react-hook-form';
+import { allValidations } from '../../utils/validations';
 
 const ForgotPassword = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+    },
+  });
+  const onSubmit = (data, e) => {
+    try {
+      e.preventDefault();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Forgot Password</Text>
-    </View>
+    <SafeAreaView style={forgotPassStyles.passwordReset}>
+      <View style={forgotPassStyles.container}>
+        <View style={loginStyles.main}>
+          <Text style={forgotPassStyles.header}>Reset Your Password</Text>
+
+          <View style={loginStyles.forms}>
+            <Controller
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: allValidations.REQUIRED,
+                },
+                pattern: allValidations.CHECK_VALIDITY_OF_EMAIL,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  autoCapitalize="none"
+                  style={loginStyles.input}
+                  placeholder="Email"
+                  placeholderTextColor={'rgba(213, 214, 240, 0.7)'}
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={onChange}
+                />
+              )}
+              name="email"
+            />
+            {errors.email && <Text style={loginStyles.error}>{errors?.email?.message}</Text>}
+          </View>
+
+          <View style={forgotPassStyles.cta}>
+            <TouchableOpacity style={forgotPassStyles.resetButton} onPress={handleSubmit(onSubmit)}>
+              <Text style={forgotPassStyles.resetButtonText}>Reset Password</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default ForgotPassword;
