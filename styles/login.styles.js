@@ -1,14 +1,15 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const loginStyles = StyleSheet.create({
   login: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#000',
+    width: '100%',
   },
 
   container: {
-    width: '80%',
+    width: '90%',
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -40,9 +41,7 @@ export const styles = StyleSheet.create({
   },
 
   forms: {
-    paddingTop: '5%',
-    marginTop: '15%',
-    paddingBottom: '20%',
+    paddingVertical: '10%',
   },
 
   input: {
@@ -79,6 +78,14 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
 
+  forgotPassword: {
+    marginLeft: 'auto',
+  },
+  forgotPasswordText: {
+    fontSize: 15,
+    color: '#fff',
+  },
+
   cta: {
     width: '100%',
   },
@@ -112,5 +119,13 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
     fontSize: 16,
+  },
+});
+
+export const registerStyles = StyleSheet.create({
+  registerText: {
+    textAlign: 'center',
+    fontSize: 24,
+    color: '#fff',
   },
 });

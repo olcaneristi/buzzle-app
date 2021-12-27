@@ -8,12 +8,10 @@ import {
   TextInput,
   SafeAreaView,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { allValidations } from '../../utils/validations';
-import { styles } from '../../styles/login.styles';
+import { loginStyles } from '../../styles/login.styles';
 
 const Login = ({ navigation }) => {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
@@ -22,10 +20,6 @@ const Login = ({ navigation }) => {
   const togglePassword = () => {
     setIsSecureEntry(prev => !prev);
   };
-
-  const DismissKeyboard = ({ children }) => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>{children}</TouchableWithoutFeedback>
-  );
 
   const {
     control,
@@ -47,17 +41,42 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.login}>
-      <DismissKeyboard>
-        <View style={styles.container}>
-          <View style={styles.main}>
-            <View style={styles.textContainer}>
-              <Text style={styles.header}>Let's sign you in.</Text>
-              <Text style={styles.label}>Welcome back.</Text>
-              <Text style={styles.label}>You've been missed!</Text>
+    <SafeAreaView style={loginStyles.login}>
+      <View style={loginStyles.container}>
+        <View style={loginStyles.main}>
+          <KeyboardAvoidingView behavior="position" enabled={avoidEnabled}>
+            <View style={loginStyles.textContainer}>
+              <Text style={loginStyles.header}>Let's sign you in.</Text>
+              <Text style={loginStyles.label}>Welcome back.</Text>
+              <Text style={loginStyles.label}>You've been missed!</Text>
             </View>
-            <KeyboardAvoidingView behavior="position" enabled={avoidEnabled}>
-              <ScrollView style={styles.forms}>
+            <ScrollView style={loginStyles.forms}>
+              <Controller
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: allValidations.REQUIRED,
+                  },
+                  pattern: allValidations.CHECK_VALIDITY_OF_EMAIL,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    autoCapitalize="none"
+                    style={loginStyles.input}
+                    placeholder="Email or username"
+                    placeholderTextColor={'gray'}
+                    onBlur={onBlur}
+                    value={value}
+                    onFocus={() => setAvoidEnabled()}
+                    onChangeText={onChange}
+                  />
+                )}
+                name="email"
+              />
+              {errors.email && <Text style={loginStyles.error}>{errors?.email?.message}</Text>}
+
+              <View style={loginStyles.passwordField}>
                 <Controller
                   control={control}
                   rules={{
@@ -65,81 +84,56 @@ const Login = ({ navigation }) => {
                       value: true,
                       message: allValidations.REQUIRED,
                     },
-                    pattern: allValidations.CHECK_VALIDITY_OF_EMAIL,
+                    minLength: allValidations.MIN_LENGTH_PASSWORD(8),
+                    pattern: allValidations.CHECK_PASSWORD,
                   }}
                   render={({ field: { onChange, onBlur, value } }) => (
                     <TextInput
+                      secureTextEntry={isSecureEntry}
                       autoCapitalize="none"
-                      style={styles.input}
-                      placeholder="Email or username"
+                      style={[loginStyles.input, loginStyles.password]}
+                      placeholder="Password"
                       placeholderTextColor={'gray'}
                       onBlur={onBlur}
-                      value={value}
                       onFocus={() => setAvoidEnabled()}
+                      value={value}
                       onChangeText={onChange}
                     />
                   )}
-                  name="email"
+                  name="password"
                 />
-                {errors.email && <Text style={styles.error}>{errors?.email?.message}</Text>}
-
-                <View style={styles.passwordField}>
-                  <Controller
-                    control={control}
-                    rules={{
-                      required: {
-                        value: true,
-                        message: allValidations.REQUIRED,
-                      },
-                      minLength: allValidations.MIN_LENGTH_PASSWORD(8),
-                      pattern: allValidations.CHECK_PASSWORD,
-                    }}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                      <TextInput
-                        secureTextEntry={isSecureEntry}
-                        autoCapitalize="none"
-                        style={[styles.input, styles.password]}
-                        placeholder="Password"
-                        placeholderTextColor={'gray'}
-                        onBlur={onBlur}
-                        onFocus={() => setAvoidEnabled()}
-                        value={value}
-                        onChangeText={onChange}
-                      />
-                    )}
-                    name="password"
-                  />
-                  <TouchableOpacity style={styles.showIcon} onPress={togglePassword}>
-                    {isSecureEntry ? (
-                      <Image source={require('../../assets/Show.png')} />
-                    ) : (
-                      <Image source={require('../../assets/Hide.png')} />
-                    )}
-                  </TouchableOpacity>
-                </View>
-                {errors.password && <Text style={styles.error}>{errors?.password?.message}</Text>}
-              </ScrollView>
-            </KeyboardAvoidingView>
-          </View>
-
-          <View style={styles.cta}>
-            <View style={styles.registerContainer}>
-              <Text style={styles.registerText}>Don't have an account? </Text>
+                <TouchableOpacity style={loginStyles.showIcon} onPress={togglePassword}>
+                  {isSecureEntry ? (
+                    <Image source={require('../../assets/Show.png')} />
+                  ) : (
+                    <Image source={require('../../assets/Hide.png')} />
+                  )}
+                </TouchableOpacity>
+              </View>
+              {errors.password && <Text style={loginStyles.error}>{errors?.password?.message}</Text>}
               <TouchableOpacity
-                style={styles.registerButton}
-                title="Register"
-                onPress={() => navigation.navigate('SignUp')}
+                style={loginStyles.forgotPassword}
+                onPress={() => navigation.navigate('ForgotPassword')}
               >
-                <Text style={styles.registerButtonText}>Register</Text>
+                <Text style={loginStyles.forgotPasswordText}>Forgot password?</Text>
               </TouchableOpacity>
-            </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
 
-            <TouchableOpacity style={styles.signInButton} onPress={handleSubmit(onSubmit)}>
-              <Text style={styles.signInText}>Sign In</Text>
+        <View style={loginStyles.cta}>
+          <View style={loginStyles.registerContainer}>
+            <Text style={loginStyles.registerText}>Don't have an account? </Text>
+            <TouchableOpacity style={loginStyles.registerButton} onPress={() => navigation.navigate('SignUp')}>
+              <Text style={loginStyles.registerButtonText}>Register</Text>
             </TouchableOpacity>
           </View>
+
+          <TouchableOpacity style={loginStyles.signInButton} onPress={handleSubmit(onSubmit)}>
+            <Text style={loginStyles.signInText}>Sign In</Text>
+          </TouchableOpacity>
         </View>
-      </DismissKeyboard>
+      </View>
     </SafeAreaView>
   );
 };
