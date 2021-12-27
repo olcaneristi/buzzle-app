@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    width: '90%',
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -17,13 +16,14 @@ export const styles = StyleSheet.create({
   slider: {
     flex: 1,
     flexDirection: 'column',
+    alignItems: 'center',
   },
 
   image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-    marginBottom: 10,
+    width: 320,
+    height: 250,
+    resizeMode: 'contain',
+    marginTop: 30,
   },
 
   title: {
@@ -52,6 +52,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    marginHorizontal: 15,
   },
   buttonContainer1: {
     width: '50%',

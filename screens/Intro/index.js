@@ -9,7 +9,7 @@ const Intro = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.intro}>
       <View style={styles.container}>
-        <Swiper style={styles.swiper} dotColor="#f7f7f7" activeDotColor="turquoise">
+        <Swiper style={styles.swiper} dotColor="#f7f7f7" activeDotColor="turquoise" paginationStyle={{ bottom: 15 }}>
           {data.map((item, i) => (
             <View key={i} style={styles.slider}>
               <View>
