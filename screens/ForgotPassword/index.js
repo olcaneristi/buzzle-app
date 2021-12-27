@@ -14,9 +14,8 @@ const ForgotPassword = () => {
       email: '',
     },
   });
-  const onSubmit = (data, e) => {
+  const onSubmit = data => {
     try {
-      e.preventDefault();
       console.log(data);
     } catch (error) {
       console.log(error);

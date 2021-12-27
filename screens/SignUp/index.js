@@ -37,10 +37,9 @@ const SignUp = ({ navigation }) => {
   const password = useRef({});
   password.current = watch('password', '');
 
-  const onSubmit = (data, e) => {
+  const onSubmit = data => {
     try {
-      e.preventDefault();
-      console.log(data);
+      alert(JSON.stringify(data, null, 2));
     } catch (error) {
       console.log(error);
     }

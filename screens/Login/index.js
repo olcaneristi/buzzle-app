@@ -26,15 +26,12 @@ const Login = ({ navigation }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    email: '',
+    password: '',
   });
-  const onSubmit = (data, e) => {
+  const onSubmit = data => {
     try {
-      e.preventDefault();
-      console.log(data);
+      alert(JSON.stringify(data, null, 2));
     } catch (error) {
       console.log(error);
     }
