@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, SafeAreaView, View, TouchableOpacity } from 'react-native';
-import { styles } from '../../styles/intro.styles';
+import { styles } from '../../styles/pages/intro.styles';
 import Swiper from 'react-native-swiper';
 import { data } from '../../data/swiper-data';
 import Svg from 'react-native-svg';

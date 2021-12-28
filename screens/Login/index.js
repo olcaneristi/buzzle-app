@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { allValidations } from '../../utils/validations';
-import { loginStyles } from '../../styles/login.styles';
+import { loginStyles } from '../../styles/pages/login.styles';
 
 const Login = ({ navigation }) => {
   const [isSecureEntry, setIsSecureEntry] = useState(true);

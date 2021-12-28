@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
-import { loginStyles, forgotPassStyles } from '../../styles/login.styles';
+import { loginStyles, forgotPassStyles } from '../../styles/pages/login.styles';
 import { useForm, Controller } from 'react-hook-form';
 import { allValidations } from '../../utils/validations';
 
