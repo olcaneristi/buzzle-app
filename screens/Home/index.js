@@ -15,7 +15,7 @@ const Home = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff', paddingTop: Platform.OS === 'android' ? 50 : 0 }}>
       <Header />
       <ScrollView refreshControl={<RefreshControl refreshing={refreshTimeline} onRefresh={onRefresh} />}>
         <InstaStories />
