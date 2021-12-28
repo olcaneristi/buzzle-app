@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ForgotPassword, Home, Intro, Login, SignUp } from './screens';
+import 'react-native-get-random-values';
 
 const Stack = createNativeStackNavigator();
 
@@ -8,7 +9,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Intro"
+        initialRouteName="Home"
         screenOptions={{
           headerTransparent: true,
           headerBackTitleVisible: false,
