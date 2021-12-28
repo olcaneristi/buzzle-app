@@ -6,6 +6,7 @@ export const loginStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#181b27',
     width: '100%',
+    paddingTop: Platform.OS === 'android' ? 25 : 0,
   },
 
   container: {

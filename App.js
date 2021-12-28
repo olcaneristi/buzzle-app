@@ -9,18 +9,31 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerTransparent: true,
-          headerBackTitleVisible: false,
-          headerTintColor: '#b4bccf',
-        }}
+        initialRouteName="Intro"
+        screenOptions={
+          Platform.OS !== 'android'
+            ? {
+                headerTransparent: true,
+                headerBackTitleVisible: false,
+                headerTintColor: '#b4bccf',
+              }
+            : {
+                headerTintColor: 'white',
+                headerStyle: {
+                  backgroundColor: '#181b27',
+                },
+              }
+        }
       >
         <Stack.Screen options={{ headerShown: false }} name="Intro" component={Intro} />
         <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
         <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />
         <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-        <Stack.Screen options={{ headerTitle: '' }} name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen
+          options={{ headerTitle: Platform.OS === 'android' ? 'Forgot Password' : '' }}
+          name="ForgotPassword"
+          component={ForgotPassword}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
