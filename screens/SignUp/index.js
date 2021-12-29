@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { allValidations } from '../../utils/validations';
@@ -201,7 +202,17 @@ const SignUp = () => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={loginStyles.submitButton} onPress={handleSubmit(onSubmit)}>
-            <Text style={loginStyles.signInText}>Sign Up</Text>
+            <Text style={loginStyles.signInText}>
+              {isSubmitLoading ? (
+                <ActivityIndicator
+                  size="small"
+                  color="#181b27"
+                  style={{ alignItems: 'center', justifyContent: 'center' }}
+                />
+              ) : (
+                'Sign Up'
+              )}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

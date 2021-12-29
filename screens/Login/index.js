@@ -8,6 +8,7 @@ import {
   TextInput,
   SafeAreaView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { allValidations } from '../../utils/validations';
@@ -157,7 +158,17 @@ const Login = () => {
           </View>
 
           <TouchableOpacity style={loginStyles.submitButton} onPress={handleSubmit(onSubmit)}>
-            <Text style={loginStyles.signInText}>{isSubmitLoading ? 'Signing In...' : 'Sign In'}</Text>
+            <Text style={loginStyles.signInText}>
+              {isSubmitLoading ? (
+                <ActivityIndicator
+                  size="small"
+                  color="#181b27"
+                  style={{ alignItems: 'center', justifyContent: 'center' }}
+                />
+              ) : (
+                'Sign In'
+              )}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

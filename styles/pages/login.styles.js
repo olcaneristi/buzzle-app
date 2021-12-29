@@ -113,6 +113,8 @@ export const loginStyles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: '#fff',
     paddingVertical: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   signInText: {
