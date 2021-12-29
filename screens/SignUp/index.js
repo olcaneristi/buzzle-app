@@ -12,10 +12,15 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { allValidations } from '../../utils/validations';
 import { loginStyles, registerStyles } from '../../styles/pages/login.styles';
+import { auth } from '../../firebase';
+import Toast from 'react-native-root-toast';
+import { useNavigation } from '@react-navigation/core';
 
-const SignUp = ({ navigation }) => {
+const SignUp = () => {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [avoidEnabled, setAvoidEnabled] = useState(false);
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+  const navigation = useNavigation();
 
   const {
     control,
@@ -34,14 +39,34 @@ const SignUp = ({ navigation }) => {
     setIsSecureEntry(prev => !prev);
   };
 
-  const password = useRef({});
-  password.current = watch('password', '');
+  const password1 = useRef({});
+  password1.current = watch('password', '');
 
-  const onSubmit = data => {
+  const onSubmit = async ({ email, password }) => {
     try {
-      alert(JSON.stringify(data, null, 2));
+      setIsSubmitLoading(true);
+      await auth.createUserWithEmailAndPassword(email, password).then(userCredentials => {
+        const user = userCredentials.user;
+        console.log('Registered with', user.email);
+      });
+      Toast.show('Signed up successfully!', {
+        duration: Toast.durations.LONG,
+        position: 50,
+        backgroundColor: '#247891',
+        opacity: 1,
+      });
+      setTimeout(() => {
+        navigation.replace('Home');
+        setIsSubmitLoading(false);
+      }, 2000);
     } catch (error) {
-      console.log(error);
+      setIsSubmitLoading(false);
+      Toast.show(error.message, {
+        duration: Toast.durations.LONG,
+        position: 50,
+        backgroundColor: 'darkred',
+        opacity: 1,
+      });
     }
   };
 
@@ -146,7 +171,7 @@ const SignUp = ({ navigation }) => {
                     value: true,
                     message: allValidations.REQUIRED,
                   },
-                  validate: value => value === password.current || 'The passwords do not match',
+                  validate: value => value === password1.current || 'The passwords do not match',
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
