@@ -3,8 +3,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ForgotPassword, Home, Intro, Login, SignUp } from './screens';
 import 'react-native-get-random-values';
 import { RootSiblingParent } from 'react-native-root-siblings';
+import { LogBox } from 'react-native';
 
 const Stack = createNativeStackNavigator();
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 export default function App() {
   return (
