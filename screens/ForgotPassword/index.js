@@ -1,10 +1,12 @@
-import React from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, SafeAreaView, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native';
 import { loginStyles, forgotPassStyles } from '../../styles/pages/login.styles';
 import { useForm, Controller } from 'react-hook-form';
 import { allValidations } from '../../utils/validations';
+import Toast from 'react-native-root-toast';
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ navigation }) => {
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -16,9 +18,25 @@ const ForgotPassword = () => {
   });
   const onSubmit = data => {
     try {
-      console.log(data);
+      setIsSubmitLoading(true);
+      Toast.show('New password has been sent to your email address.', {
+        duration: Toast.durations.LONG,
+        position: 50,
+        backgroundColor: '#247891',
+        opacity: 1,
+      });
+      setTimeout(() => {
+        navigation.replace('Login');
+        setIsSubmitLoading(false);
+      }, 2000);
     } catch (error) {
-      console.log(error);
+      setIsSubmitLoading(false);
+      Toast.show('This email address was not found.', {
+        duration: Toast.durations.LONG,
+        position: 50,
+        backgroundColor: 'darkred',
+        opacity: 1,
+      });
     }
   };
 
@@ -55,8 +73,22 @@ const ForgotPassword = () => {
           </View>
 
           <View style={forgotPassStyles.cta}>
-            <TouchableOpacity style={forgotPassStyles.resetButton} onPress={handleSubmit(onSubmit)}>
-              <Text style={forgotPassStyles.resetButtonText}>Reset Password</Text>
+            <TouchableOpacity
+              style={forgotPassStyles.resetButton}
+              onPress={handleSubmit(onSubmit)}
+              disabled={isSubmitLoading}
+            >
+              <Text style={forgotPassStyles.resetButtonText}>
+                {isSubmitLoading ? (
+                  <ActivityIndicator
+                    size="small"
+                    color="#ffffff"
+                    style={{ alignItems: 'center', justifyContent: 'center' }}
+                  />
+                ) : (
+                  'Reset Password'
+                )}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

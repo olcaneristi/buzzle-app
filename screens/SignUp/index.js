@@ -201,7 +201,11 @@ const SignUp = () => {
               <Text style={loginStyles.registerButtonText}>Login</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={loginStyles.submitButton} onPress={handleSubmit(onSubmit)}>
+          <TouchableOpacity
+            style={loginStyles.submitButton}
+            onPress={handleSubmit(onSubmit)}
+            disabled={isSubmitLoading}
+          >
             <Text style={loginStyles.signInText}>
               {isSubmitLoading ? (
                 <ActivityIndicator

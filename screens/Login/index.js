@@ -148,16 +148,16 @@ const Login = () => {
         <View style={loginStyles.cta}>
           <View style={loginStyles.registerContainer}>
             <Text style={loginStyles.registerText}>Don't have an account? </Text>
-            <TouchableOpacity
-              style={loginStyles.registerButton}
-              onPress={() => navigation.navigate('SignUp')}
-              disabled={!isSubmitLoading}
-            >
+            <TouchableOpacity style={loginStyles.registerButton} onPress={() => navigation.navigate('SignUp')}>
               <Text style={loginStyles.registerButtonText}>Register</Text>
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={loginStyles.submitButton} onPress={handleSubmit(onSubmit)}>
+          <TouchableOpacity
+            style={loginStyles.submitButton}
+            onPress={handleSubmit(onSubmit)}
+            disabled={isSubmitLoading}
+          >
             <Text style={loginStyles.signInText}>
               {isSubmitLoading ? (
                 <ActivityIndicator
