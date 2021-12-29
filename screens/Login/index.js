@@ -12,10 +12,15 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { allValidations } from '../../utils/validations';
 import { loginStyles } from '../../styles/pages/login.styles';
+import { auth } from '../../firebase';
+import { useNavigation } from '@react-navigation/core';
+import Toast from 'react-native-root-toast';
 
-const Login = ({ navigation }) => {
+const Login = () => {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [avoidEnabled, setAvoidEnabled] = useState(false);
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+  const navigation = useNavigation();
 
   const togglePassword = () => {
     setIsSecureEntry(prev => !prev);
@@ -29,11 +34,31 @@ const Login = ({ navigation }) => {
     email: '',
     password: '',
   });
-  const onSubmit = data => {
+  const onSubmit = async ({ email, password }) => {
     try {
-      alert(JSON.stringify(data, null, 2));
+      setIsSubmitLoading(true);
+      await auth.signInWithEmailAndPassword(email, password).then(userCredentials => {
+        const user = userCredentials.user;
+        console.log('Logged in with', user.email);
+      });
+      setTimeout(() => {
+        Toast.show('Logged in successfully!', {
+          duration: Toast.durations.LONG,
+          position: 50,
+          backgroundColor: '#247891',
+          opacity: 1,
+        });
+        navigation.replace('Home');
+        setIsSubmitLoading(false);
+      }, 1500);
     } catch (error) {
-      console.log(error);
+      setIsSubmitLoading(false);
+      Toast.show(error.message, {
+        duration: Toast.durations.LONG,
+        position: 50,
+        backgroundColor: 'darkred',
+        opacity: 1,
+      });
     }
   };
 
@@ -108,6 +133,7 @@ const Login = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
               {errors.password && <Text style={loginStyles.error}>{errors?.password?.message}</Text>}
+
               <TouchableOpacity
                 style={loginStyles.forgotPassword}
                 onPress={() => navigation.navigate('ForgotPassword')}
@@ -121,13 +147,17 @@ const Login = ({ navigation }) => {
         <View style={loginStyles.cta}>
           <View style={loginStyles.registerContainer}>
             <Text style={loginStyles.registerText}>Don't have an account? </Text>
-            <TouchableOpacity style={loginStyles.registerButton} onPress={() => navigation.navigate('SignUp')}>
+            <TouchableOpacity
+              style={loginStyles.registerButton}
+              onPress={() => navigation.navigate('SignUp')}
+              disabled={!isSubmitLoading}
+            >
               <Text style={loginStyles.registerButtonText}>Register</Text>
             </TouchableOpacity>
           </View>
 
           <TouchableOpacity style={loginStyles.submitButton} onPress={handleSubmit(onSubmit)}>
-            <Text style={loginStyles.signInText}>Sign In</Text>
+            <Text style={loginStyles.signInText}>{isSubmitLoading ? 'Signing In...' : 'Sign In'}</Text>
           </TouchableOpacity>
         </View>
       </View>
