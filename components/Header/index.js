@@ -6,7 +6,7 @@ import Add from '../../assets/icons/Add';
 import Like from '../../assets/icons/Like';
 import DirectMessage from '../../assets/icons/DirectMessage';
 
-const Header = () => {
+const Header = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image style={styles.brand} source={require('../../assets/logo.png')} />
@@ -16,12 +16,12 @@ const Header = () => {
             <Add />
           </Svg>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log('navigate activity')} style={[styles.activity, styles.items]}>
+        <TouchableOpacity onPress={() => navigation.navigate('Activity')} style={[styles.activity, styles.items]}>
           <Svg>
             <Like />
           </Svg>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log('navigate dm')} style={[styles.directs, styles.items]}>
+        <TouchableOpacity onPress={() => navigation.navigate('Messages')} style={[styles.directs, styles.items]}>
           <Svg>
             <DirectMessage />
           </Svg>

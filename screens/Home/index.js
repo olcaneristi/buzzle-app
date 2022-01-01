@@ -43,7 +43,7 @@ const Home = () => {
         </View>
       ) : user ? (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fff', paddingTop: Platform.OS === 'android' ? 50 : 0 }}>
-          <Header />
+          <Header navigation={navigation} />
           <ScrollView refreshControl={<RefreshControl refreshing={refreshTimeline} onRefresh={onRefresh} />}>
             <InstaStories />
             {postList && postList.map(post => <Posts key={post.id} post={post} />)}

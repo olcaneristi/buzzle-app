@@ -49,7 +49,7 @@ const Login = () => {
           backgroundColor: '#247891',
           opacity: 1,
         });
-        navigation.replace('Home');
+        navigation.replace('Homepage');
         setIsSubmitLoading(false);
       }, 1500);
     } catch (error) {

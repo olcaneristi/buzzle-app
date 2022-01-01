@@ -57,7 +57,7 @@ const SignUp = () => {
         opacity: 1,
       });
       setTimeout(() => {
-        navigation.replace('Home');
+        navigation.replace('Homepage');
         setIsSubmitLoading(false);
       }, 2000);
     } catch (error) {
