@@ -24,7 +24,7 @@
     "react-hook-form": "^7.22.5",
     "react-native": "0.64.3",
     "react-native-get-random-values": "^1.7.2",
-    "react-native-insta-story": "^1.1.3",
+    "react-native-insta-story": "^1.1.4",
     "react-native-root-toast": "^3.3.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",

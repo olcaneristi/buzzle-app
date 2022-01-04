@@ -5319,10 +5319,10 @@ react-native-get-random-values@^1.7.2:
   dependencies:
     fast-base64-decode "^1.0.0"
 
-react-native-insta-story@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/react-native-insta-story/-/react-native-insta-story-1.1.3.tgz#f0322f4ea6a2f17e62a254941ab70a8227732297"
-  integrity sha512-Wy5bU3I8TbonczmIqjG4lNABZQR8JMdXcv4Sj1qo6sC/qL9CA4hE9IB6Cl/WtRMBQj1FG1EmT7ld2+ZJSldVjw==
+react-native-insta-story@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-native-insta-story/-/react-native-insta-story-1.1.4.tgz#d546cc070bc6e9719009d9819c7a27b175e458aa"
+  integrity sha512-2XRl0e5fquacbs/MXDnENH085N7MR4QQGTHxU/jJ5CveouOKKGmqa7M437/50Thbyj68v6qtViXzMbSDwR3nBg==
   dependencies:
     prop-types "^15.6.2"
     react-native-modalbox "^2.0.2"
