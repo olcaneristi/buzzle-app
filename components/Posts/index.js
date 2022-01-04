@@ -12,7 +12,7 @@ import BookmarkFill from '../../assets/icons/BookmarkFill';
 import LikeFill from '../../assets/icons/LikeFill';
 
 const Posts = ({ post }) => {
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(post.isLiked);
   const [bookmark, setBookmark] = useState(post.isBookmarked);
   const [likeCount, setLikeCount] = useState(post.likes);
   const [state, setState] = useState({
