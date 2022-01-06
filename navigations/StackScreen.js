@@ -17,9 +17,6 @@ const StackScreen = () => {
             }
           : {
               headerTintColor: 'white',
-              headerStyle: {
-                backgroundColor: '#181b27',
-              },
             }
       }
     >
