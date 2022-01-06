@@ -122,7 +122,7 @@ export const postList = [
     id: uuid(),
     description:
       "We need distributors to evangelize the new line to local markets let's not solutionize this right now parking lot it.",
-    image: 'https://img-9gag-fun.9cache.com/photo/axzYVjY_700bwp.webp',
+    image: 'https://833250.smushcdn.com/1694534/wp-content/uploads/2021/06/10.jpeg',
     likes: 452,
     comments: 28,
     date: '2021-12-28 11:51:16',
@@ -137,7 +137,7 @@ export const postList = [
     id: uuid(),
     description:
       "We are a big name to have in your portfolio will royalties in the company do instead of cash yet the website doesn't have the theme i was going for and try a more powerful colour can the black be darker and thats not what i saw in my head at all.",
-    image: 'https://img-9gag-fun.9cache.com/photo/a8E22K6_460swp.webp',
+    image: 'https://833250.smushcdn.com/1694534/wp-content/uploads/2021/06/2.jpeg',
     likes: 281,
     comments: 13,
     date: '2021-12-28 14:53:16',
@@ -152,7 +152,7 @@ export const postList = [
     id: uuid(),
     description:
       "Time vampire downselect yet we've got to manage that low hanging fruit. Unlock meaningful moments of relaxation ultimate measure of success anti-pattern.",
-    image: 'https://img-9gag-fun.9cache.com/photo/a27vwpO_460swp.webp',
+    image: 'https://833250.smushcdn.com/1694534/wp-content/uploads/2021/06/3.5-3.jpeg',
     likes: 236,
     comments: 7,
     date: '2021-12-27 23:10:16',

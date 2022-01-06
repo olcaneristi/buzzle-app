@@ -49,9 +49,7 @@ const Home = () => {
             {postList && postList.map(post => <Posts key={post.id} post={post} />)}
           </ScrollView>
         </SafeAreaView>
-      ) : (
-        'asdasd'
-      )}
+      ) : null}
     </>
   );
 };
