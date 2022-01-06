@@ -21,7 +21,7 @@ const Home = () => {
   const handleUser = useCallback(
     loggedInUser => {
       if (!loggedInUser) {
-        return navigation.replace('Login');
+        return navigation.replace('Intro');
       }
 
       setUser(loggedInUser);
