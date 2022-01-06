@@ -42,7 +42,7 @@ $ yarn install
 #### In the project directory, run the Metro Bundler::
 
 ```bash
-$ npm start
+$ npm run start
 
 #or
 
@@ -52,11 +52,15 @@ $ yarn start
 #### Then, run your project on iOS Simulator or Android Emulator
 
 ```bash
-$ yarn ios
-
+$ yarn ios 
 #or
+$ npm run ios
+
+###
 
 $ yarn android
+#or
+$ npm run android
 ```
 
 ## 🗂️ Packages used in this project
